@@ -55,6 +55,16 @@ class App extends Component {
     this.setState({ contacts: contactsSorted });
   };
 
+  deleteActor = (contact, index) => {
+    let newContacts = [...this.state.contacts];
+    newContacts.splice(index, 1);
+    let newLeftContacts = [...this.state.leftContacts, contact];
+    this.setState({
+      contacts: newContacts,
+      leftContacts: newLeftContacts
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -68,6 +78,7 @@ class App extends Component {
               <th>Picture</th>
               <th>Name</th>
               <th>Popularity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +90,11 @@ class App extends Component {
                   </td>
                   <td>{contact.name}</td>
                   <td>{contact.popularity}</td>
+                  <td>
+                    <button onClick={this.deleteActor}>
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
             })}
