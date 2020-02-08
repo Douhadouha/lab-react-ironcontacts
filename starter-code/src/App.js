@@ -24,11 +24,44 @@ class App extends Component {
       leftContacts: newLeftContacts
     });
   };
+
+  sortTabByName = () => {
+    let contactsToSort = this.state.contacts;
+
+    function sortName(a, b) {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    }
+
+    let contactsSorted = contactsToSort.sort(sortName);
+
+    this.setState({ contacts: contactsSorted });
+  };
+
+  sortTabByPop = () => {
+    let contactsToSort = this.state.contacts;
+
+    function sortPop(a, b) {
+      return a.popularity - b.popularity;
+    }
+
+    let contactsSorted = contactsToSort.sort(sortPop);
+
+    this.setState({ contacts: contactsSorted });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>IronContacts</h1>
         <button onClick={this.addRandomActor}>Add Random Contact</button>
+        <button onClick={this.sortTabByName}>Sort by name</button>
+        <button onClick={this.sortTabByPop}>Sort by popularity</button>
         <table>
           <thead>
             <tr>
